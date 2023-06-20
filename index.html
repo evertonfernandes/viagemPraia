@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contagem Regressiva Praia</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #countdown {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      font-size: 100px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    #background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown"></div>
+  <img src="https://i0.wp.com/viagemempauta.com.br/wp-content/uploads/2016/01/1rd_Praia-de-Ponta-Verde_by_-Wesley-Menegari.jpg?ssl=1" id="background-image" alt="Maceió Beach">
+  <script>
+    // Define a data de destino da contagem regressiva (formato: ano, mês (0-11), dia, horas, minutos, segundos, milissegundos)
+                              // aa   mm  dd  hh  mm ss  ms   
+    const targetDate = new Date(2023, 9-1, 1, 10, 0, 0, 0);
+
+    function updateCountdown() {
+      const currentDate = new Date();
+
+      var timeDifference = targetDate - currentDate;
+
+      if(timeDifference < 0){timeDifference = 0}
+      
+      
+
+      // Calcula os componentes da contagem regressiva
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+      const milliseconds = timeDifference % 1000;
+
+
+      // Formata a contagem regressiva
+      const formattedCountdown = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(3, '0')}`;
+
+      // Atualiza o elemento da contagem regressiva
+      document.getElementById('countdown').textContent = formattedCountdown;
+    }
+
+    // Atualiza a contagem regressiva a cada segundo
+    setInterval(updateCountdown, 1);
+  </script>
+</body>
+</html>
